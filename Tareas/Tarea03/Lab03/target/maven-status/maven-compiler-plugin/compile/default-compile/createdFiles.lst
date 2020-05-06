@@ -1,0 +1,5 @@
+edu\ucr\rp\lab03\BuilderPaterrnDemo.class
+edu\ucr\rp\lab03\generator\PasswordGeneratorBuilder.class
+edu\ucr\rp\lab03\generator\PasswordGenerator.class
+edu\ucr\rp\lab03\ui\PasswordGeneratorForm.class
+edu\ucr\rp\lab03\ui\UIConstants.class
