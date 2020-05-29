@@ -9,6 +9,8 @@ public class InventoryApplicationDemo {
         System.out.println("Update");
         System.out.println("HOLA DIEGO GARITA");
         System.out.println("HOLA DONACONEJO");
+        System.out.println("Hola don Alejandro");
+        System.out.println("Recibido");
     }
     
 }
