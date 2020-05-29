@@ -33,7 +33,7 @@ public class PasswordGeneratorTest {
      *
      * - Then: El password contiene al menos mayúscula -> Validaciones
      */
-   // @Test
+    // @Test
     public void givenAnUppercaseAPasswordIsGenerated() {
         builder.withSpecialChars(new char[]{'#'});
         PasswordGenerator passwordGenerator = builder.build();
@@ -59,7 +59,7 @@ public class PasswordGeneratorTest {
      * - Then: El password contiene al menos un caracter especial de la lista de
      * caracters
      */
-   // @Test
+    // @Test
     public void givenAnEspecialCharAPasswordIsGenerated() {
 
         PasswordGenerator passwordGenerator = builder.build();
@@ -92,4 +92,113 @@ public class PasswordGeneratorTest {
 //            }
 //        return count;
 //    }
+    //*****************************************************************************************
+    /**
+     * Primer test Scenario: Generar un password que se complete con letras
+     * minusculas
+     *
+     * - Given: Cantidad mínima de una minuscula
+     *
+     *
+     * - When: Generamos el password : accion
+     *
+     * - Then: El password rellena el resto del password faltante con minusculas
+     */
+    // @Test
+    // el metodo generado en password generator genera minusculas
+    // por defecto, asi que se valida que sean minimo 3
+    public void givenALowercaseAPasswordIsGenerated() {
+        PasswordGenerator passwordGenerator = builder.build();
+
+        String password = passwordGenerator.generate();
+        Assert.assertTrue("Invalid number of Lower cases", getLowerCases(password) >= 0);
+    }// end givenALowercaseAPasswordIsGenerated
+
+    private long getLowerCases(String password) {
+
+        return password.chars().filter(lower -> Character.isLowerCase(lower)).count();
+    }// 
+    //*****************************************************************************************  
+
+    /**
+     * segundo test - Scenario: Generar un password con al menos 3 numeros
+     *
+     * - Given: cantidad minima de numeros
+     *
+     *
+     * - When: Generamos el password : accion
+     *
+     * - Then: El password contiene al menos 3 numeros
+     */
+    //@Test
+    public void givenANumbersIsGenerated() {
+        PasswordGenerator passwordGenerator = builder.build();
+
+        String password = passwordGenerator.generate();
+        Assert.assertTrue("Invalid amount of numbers", getNumbers(password) >= 3);
+    }// end givenANumbersIsGenerated
+
+    private long getNumbers(String password) {
+
+        return password.chars().filter(number -> Character.isDigit(number)).count();
+
+    }//
+
+    //*****************************************************************************************  
+    /**
+     * Tercer test - Scenario: Generar un password con un maximo de 5 mayusculas
+     *
+     * - Given: cantidad maxima de mayusculas
+     *
+     *
+     * - When: Generamos el password : accion
+     *
+     * - Then: El password contiene como maximo 5 letraas
+     */
+    //@Test
+    public void givenAnUppercaseMaxAPasswordIsGenerated() {
+        PasswordGenerator passwordGenerator = builder.build();
+
+        String password = passwordGenerator.generate();
+        Assert.assertTrue("Invalid number of Upper cases", getMaxUpperCases(password) <= 5);
+    }// end givenALowercaseAPasswordIsGenerated
+
+    private long getMaxUpperCases(String password) {
+
+        return password.chars().filter(Upper -> Character.isLowerCase(Upper)).count();
+    }// 
+
+    //*****************************************************************************************  
+    /**
+     * Cuarto test
+     * - Scenario: Generar un password con un maximo de 2 mayusculas
+     * y 3 numeros
+     *
+     * - Given: cantidad maxima de mayusculas y de numeros
+     *
+     * - When: Generamos el password : accion
+     *
+     * - Then: El password contiene como maximo 2 letras y 3 numeros
+     */
+    //@Test
+    public void givenAnUppercaseAndNumbersMaxAPasswordIsGenerated() {
+        PasswordGenerator passwordGenerator = builder.build();
+
+        String password = passwordGenerator.generate();
+        Assert.assertTrue("Invalid number of Upper cases", getMaxUpperCases(password) <= 2);
+        Assert.assertTrue("Invalid number of number", getMaxNumbersCases(password) <= 3);
+    }// end givenALowercaseAPasswordIsGenerated
+
+    private long getMaxUpperCasess(String password) {
+
+        return password.chars().filter(Upper -> Character.isLowerCase(Upper)).count();
+
+    }//
+
+    private long getMaxNumbersCases(String password) {
+
+        return password.chars().filter(number -> Character.isLowerCase(number)).count();
+
+    }// 
+
 }
