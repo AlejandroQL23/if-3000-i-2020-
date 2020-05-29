@@ -8,6 +8,7 @@ public class InventoryApplicationDemo {
         System.out.println("PROYECTO FINALIZADO!!!");
         System.out.println("Update");
         System.out.println("HOLA DIEGO GARITA");
+        System.out.println("HOLA DONACONEJO");
     }
     
 }
