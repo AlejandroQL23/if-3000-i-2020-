@@ -7,7 +7,8 @@ import javax.swing.JOptionPane;
 
 public class SaveObject {
 
-    ConstantsElements constantsElements = new ConstantsElements();
+  //  ConstantsElements constantsElements = new ConstantsElements(); //class
+    
     public int sizeLine = 0;
 
     /**
@@ -127,23 +128,23 @@ public class SaveObject {
      * Método que se encarga de eliminar completamente un archivo
      * @param fileName recibe el nombre del archivo que será eliminado
      */
-    public void deleteFiles(String fileName) {
-        constantsElements.soundPlayer("aviso");
-        constantsElements.alertConfirmation("Esta seguro derealizar esta accion?");
-        Optional<ButtonType> result = constantsElements.alertConfirmation("").showAndWait();
-        if (result.get() == ButtonType.OK) {
-            File puntoCatalogo = new File("ArchTexto//" + fileName + " catalogo.txt");
-            File puntoPropiedades = new File("ArchTexto//" + fileName + " propiedades.txt");
-            puntoCatalogo.delete();
-            puntoPropiedades.delete();
-            if (!puntoPropiedades.exists() && !puntoCatalogo.exists()) {
-                constantsElements.soundPlayer("exito");
-                constantsElements.alertInformation("El elemento ingresado se borro con exito");
-            }
-            else {
-                constantsElements.alertWarning("No se pudo borrar el archivo, intente de nuevo");
-            }
-        }
-    }//end deleteFiles()
+//    public void deleteFiles(String fileName) {
+//        constantsElements.soundPlayer("aviso");
+//        constantsElements.alertConfirmation("Esta seguro derealizar esta accion?");
+//        Optional<ButtonType> result = constantsElements.alertConfirmation("").showAndWait();
+//        if (result.get() == ButtonType.OK) {
+//            File puntoCatalogo = new File("ArchTexto//" + fileName + " catalogo.txt");
+//            File puntoPropiedades = new File("ArchTexto//" + fileName + " propiedades.txt");
+//            puntoCatalogo.delete();
+//            puntoPropiedades.delete();
+//            if (!puntoPropiedades.exists() && !puntoCatalogo.exists()) {
+//                constantsElements.soundPlayer("exito");
+//                constantsElements.alertInformation("El elemento ingresado se borro con exito");
+//            }
+//            else {
+//                constantsElements.alertWarning("No se pudo borrar el archivo, intente de nuevo");
+//            }
+//        }
+//    }//end deleteFiles()
 
 }//end SaveObject
