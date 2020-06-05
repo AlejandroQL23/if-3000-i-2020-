@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class SaveObject {
 
-  //  ConstantsElements constantsElements = new ConstantsElements(); //class
+  ConstantsElements constantsElements = new ConstantsElements(); //class
     
     public int sizeLine = 0;
 

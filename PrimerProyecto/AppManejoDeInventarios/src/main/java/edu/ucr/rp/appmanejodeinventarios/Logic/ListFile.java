@@ -1,4 +1,4 @@
-package edu.ucr.rp.proyectprog_v1.Logic;
+package edu.ucr.rp.appmanejodeinventarios.Logic;
 
 import java.io.*;
 import java.util.ArrayList;
