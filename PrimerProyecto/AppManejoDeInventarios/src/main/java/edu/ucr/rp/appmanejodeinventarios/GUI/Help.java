@@ -9,10 +9,10 @@ import javafx.scene.text.*;
 
 public class Help {
 
-    Label labelCatalogue = new Label("");
+    Label labelCatalog = new Label("");
     Label labelMaintenance = new Label("");
     Label labelReports = new Label("");
-    Button buttonCatalogue;
+    Button buttonCatalog;
     Button buttonMaintenance;
     Button buttonReports;
 
@@ -32,24 +32,24 @@ public class Help {
         labelFunctionality.setTextFill(Color.POWDERBLUE);
         gridPaneHelper.add(labelFunctionality, 0, 1);
 
-        buttonCatalogue = new Button("Crear Catalogo");
-        buttonCatalogue.setTextFill(Color.WHITE);
-        buttonCatalogue.setStyle("-fx-background-color: BLACK");
-        buttonCatalogue.setFont(Font.font("Castellar", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 10));
-        gridPaneHelper.add(buttonCatalogue, 0, 2);
-        buttonCatalogue.setOnAction((event) -> {
+        buttonCatalog = new Button("Crear Catalogo");
+        buttonCatalog.setTextFill(Color.WHITE);
+        buttonCatalog.setStyle("-fx-background-color: BLACK");
+        buttonCatalog.setFont(Font.font("Castellar", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 10));
+        gridPaneHelper.add(buttonCatalog, 0, 2);
+        buttonCatalog.setOnAction((event) -> {
             labelReports.setVisible(false);
             labelMaintenance.setVisible(false);
-            labelCatalogue = new Label("Crear catalogo: \n Es donde se define el nombre del objeto y las propiedades de este \n "
+            labelCatalog = new Label("Crear catalogo: \n Es donde se define el nombre del objeto y las propiedades de este \n "
                     + "Definir propiedades: \n Aquí podra asignar las propiedades anteriormente definidas \n");
-            labelCatalogue.setFont(Font.font("Rockwell", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 20));  // tipo y tamaño de letra
-            labelCatalogue.setStyle("-fx-background-color: rgb(41, 75, 152);");
-            labelCatalogue.setTextFill(Color.POWDERBLUE);
-            labelCatalogue.setVisible(true);
-            gridPaneHelper.add(labelCatalogue, 0, 7);
+            labelCatalog.setFont(Font.font("Rockwell", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 20));  // tipo y tamaño de letra
+            labelCatalog.setStyle("-fx-background-color: rgb(41, 75, 152);");
+            labelCatalog.setTextFill(Color.POWDERBLUE);
+            labelCatalog.setVisible(true);
+            gridPaneHelper.add(labelCatalog, 0, 7);
             buttonMaintenance.setDisable(false);
             buttonReports.setDisable(false);
-            buttonCatalogue.setDisable(true);
+            buttonCatalog.setDisable(true);
 
         }); //end action Paises
 
@@ -60,7 +60,7 @@ public class Help {
         gridPaneHelper.add(buttonReports, 0, 4);
         buttonReports.setOnMouseClicked((event) -> {
             labelMaintenance.setVisible(false);
-            labelCatalogue.setVisible(false);
+            labelCatalog.setVisible(false);
 
             labelReports = new Label("Búsqueda por catalogo: \n Es donde se muestran los distintos objetos que tiene un catalogo en específico \n "
                     + "Modificar catalogo: \n Aquí podrás modificar \n"
@@ -71,7 +71,7 @@ public class Help {
             labelReports.setVisible(true);
             gridPaneHelper.add(labelReports, 0, 7);
             buttonMaintenance.setDisable(false);
-            buttonCatalogue.setDisable(false);
+            buttonCatalog.setDisable(false);
             buttonReports.setDisable(true);
 
         }); //end action report
@@ -83,7 +83,7 @@ public class Help {
         gridPaneHelper.add(buttonMaintenance, 0, 3);
         buttonMaintenance.setOnMouseClicked((event) -> {
 
-            labelCatalogue.setVisible(false);
+            labelCatalog.setVisible(false);
             labelReports.setVisible(false);
             labelMaintenance = new Label("Aquí podrás eliminar por completo todos tus registros ");
             labelMaintenance.setTextFill(Color.POWDERBLUE);
@@ -91,7 +91,7 @@ public class Help {
             labelMaintenance.setStyle("-fx-background-color: rgb(41, 75, 152);");
             labelMaintenance.setVisible(true);
             gridPaneHelper.add(labelMaintenance, 0, 7);
-            buttonCatalogue.setDisable(false);
+            buttonCatalog.setDisable(false);
             buttonReports.setDisable(false);
             buttonMaintenance.setDisable(true);
         }); //end action Mant

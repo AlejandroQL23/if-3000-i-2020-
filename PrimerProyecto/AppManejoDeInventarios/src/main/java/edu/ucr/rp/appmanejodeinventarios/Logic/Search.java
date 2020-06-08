@@ -6,11 +6,16 @@ import javax.swing.JOptionPane;
 
 public class Search {
 
+    public ArrayList<String> catalogList = new ArrayList();
+    public int counter = 0;
+    String file = "ArchTexto//";
+
     /**
      * Método que analiza si un archivo existe
+     *
      * @param fileName recibe el nombre del archivo que será analizado
      * @return retorna true si existe y false si no existe
-     */ 
+     */
     public boolean exist(String fileName) {
         File file = new File("ArchTexto//" + fileName + " propiedades.txt");
         if (file.exists()) {
@@ -21,8 +26,9 @@ public class Search {
 
     /**
      * Método que lee la las líneas para buscar un String específico
-     * 
-     * @param fileName recibe el nombre del archivo para buscar especificamente en un archivo
+     *
+     * @param fileName recibe el nombre del archivo para buscar especificamente
+     * en un archivo
      * @param searcher recibe el String a ser buscado línea a línea
      * @return retorna la línea en la que se encuentra el String a buscar
      */
@@ -43,11 +49,10 @@ public class Search {
                 }
                 currentRegistry = bufferedReader.readLine();
             }
-        }
-        catch (FileNotFoundException fileNotFoundException) {
-           JOptionPane.showMessageDialog(null, fileNotFoundException+"\nProblemas con el archivo");
+        } catch (FileNotFoundException fileNotFoundException) {
+            JOptionPane.showMessageDialog(null, fileNotFoundException + "\nProblemas con el archivo");
         } catch (IOException IOException) {
-           JOptionPane.showMessageDialog(null, IOException+"\nProblemas con el archivo");
+            JOptionPane.showMessageDialog(null, IOException + "\nProblemas con el archivo");
         }
 
         return lineKeeper;
@@ -55,8 +60,9 @@ public class Search {
 
     /**
      * Método que remueve una propiedad del archivo, se utiliza para modificar
-     * 
-     * @param fileName recibe el nombre del archivo que será modificado y de donde se eliminará la línea especifica
+     *
+     * @param fileName recibe el nombre del archivo que será modificado y de
+     * donde se eliminará la línea especifica
      * @param lineToRemove recibe el String que valida cuál línea será eliminada
      */
     public void removeLineFromFile(String fileName, String lineToRemove) {
@@ -76,11 +82,10 @@ public class Search {
                 currentRegistry = bufferedReader.readLine();
             }
             previousFile.deleteOnExit();
-        }
-        catch (FileNotFoundException fileNotFoundException) {
-            JOptionPane.showMessageDialog(null, fileNotFoundException+"\nProblemas con el archivo");
+        } catch (FileNotFoundException fileNotFoundException) {
+            JOptionPane.showMessageDialog(null, fileNotFoundException + "\nProblemas con el archivo");
         } catch (IOException IOException) {
-            JOptionPane.showMessageDialog(null, IOException+"\nProblemas con el archivo");
+            JOptionPane.showMessageDialog(null, IOException + "\nProblemas con el archivo");
         }
         File fileNew = new File("ArchTexto//" + fileName + " propiedades.txt");
         try {
@@ -89,11 +94,41 @@ public class Search {
             for (int i = 0; i < linesList.size(); i++) {
                 printStream.println(linesList.get(i));
             }
-        }
-        catch (FileNotFoundException fileNotFoundException) {
-            JOptionPane.showMessageDialog(null, fileNotFoundException+"\nProblemas con el archivo");
+        } catch (FileNotFoundException fileNotFoundException) {
+            JOptionPane.showMessageDialog(null, fileNotFoundException + "\nProblemas con el archivo");
         }
     }//end removeLineFromFile()
 
-   
+    /**
+     * Metodo para traer los nombres de los txt existentes, solo los catalogos,
+     * los almacena en un ArrayList global
+     */
+    public void printFiles() {
+        File folder = new File(file);
+        File[] fileNames = folder.listFiles();
+        for (File file : fileNames) {
+
+            try {
+                if (file.getCanonicalPath().contains("catalogo.txt")) {
+                    String name = file.getName();
+                    name = name.replaceAll(" catalogo.txt", "");
+                    catalogList.add(name);
+                    counter++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     *
+     * @return retorna la cantidad de elementos que hay en el Arraylist, la
+     * cantidad que han sido agregadas
+     */
+    public int counter() {
+        return counter;
+    }//end counter()
+
 }//end search

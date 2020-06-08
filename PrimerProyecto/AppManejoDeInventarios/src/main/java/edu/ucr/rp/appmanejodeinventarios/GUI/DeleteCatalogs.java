@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import static edu.ucr.rp.appmanejodeinventarios.Logic.ConstantsElements.*;
 
-public class DeleteCatalogues {
+public class DeleteCatalogs {
 
     SaveObject saveObject = new SaveObject();
     Button buttonDelete;
@@ -18,7 +18,7 @@ public class DeleteCatalogues {
      * @return Nos da la GUI que nos permite eliminar el .catálogo y el
      * .propiedades indicado por el usuario
      */
-    public GridPane deleteCatalogues() {
+    public GridPane deleteCatalogs() {
 
         GridPane gridPaneDelete = new GridPane();
         gridPaneDelete.setMinSize(GRID_WIDTH, GRID_HIGH);
@@ -67,5 +67,5 @@ public class DeleteCatalogues {
             gridPaneDelete.setBackground(Background.EMPTY);  //limpia color para que quede el color
         });
         return gridPaneDelete;
-    }//end deleteCatalogues() 
-}//end DeleteCatalogues
+    }//end deleteCatalogs() 
+}//end DeleteCatalogs

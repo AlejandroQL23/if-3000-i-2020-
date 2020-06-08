@@ -1,7 +1,7 @@
 package edu.ucr.rp.appmanejodeinventarios.GUI;
 
 import static edu.ucr.rp.appmanejodeinventarios.Logic.ConstantsElements.*;
-import edu.ucr.rp.appmanejodeinventarios.Logic.ListArchivist;
+import edu.ucr.rp.appmanejodeinventarios.Logic.SaveObject;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +13,7 @@ import javafx.scene.text.*;
 
 public class ShowPropertiesOfElements {
 
-    ListArchivist listArchivist = new ListArchivist();
+    SaveObject saveObject = new SaveObject();
 
     Label labelShowContentOfFiles;
     TextField textFieldSearch = new TextField();
@@ -25,10 +25,10 @@ public class ShowPropertiesOfElements {
      * @return Nos da la GUI que nos permite mostrar la información contenida en
      * el .propidades
      */
-    public BorderPane showInformationByCatalogue() {
+    public BorderPane showInformationByCatalog() {
 
-        BorderPane borderPaneShowInformationByCatalogue = new BorderPane();
-        borderPaneShowInformationByCatalogue.setPrefSize(BORDER_WIDTH, BORDER_HIGH);
+        BorderPane borderPaneShowInformationByCatalogs = new BorderPane();
+        borderPaneShowInformationByCatalogs.setPrefSize(BORDER_WIDTH, BORDER_HIGH);
         gridPaneShowProperties.setMinSize(GRID_WIDTH, GRID_HIGH);
         // determina el espacio entre columnas (vertical y horizontal)
         gridPaneShowProperties.setVgap(8);   //espacio
@@ -65,12 +65,12 @@ public class ShowPropertiesOfElements {
 
             String getName = textFieldSearch.getText();
             try {
-                labelShowContentOfFiles = new Label(listArchivist.showContent(getName).replace("|", " "));
+                labelShowContentOfFiles = new Label(saveObject.showContent(getName).replace("|", " "));
                 labelShowContentOfFiles.setFont(Font.font("Times New Roman", FontWeight.SEMI_BOLD, 20));
                 labelShowContentOfFiles.setTextFill(Color.WHITE);
                 labelShowContentOfFiles.setStyle("-fx-background-color: rgb(41, 75, 152);");
 
-            }//end try//end try//end try//end try//end try//end try//end try//end try
+            }//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try//end try
             catch (IOException IOException) {
                 Logger.getLogger(ShowPropertiesOfElements.class.getName()).log(Level.SEVERE, null, IOException);
             }//end catch//end catch
@@ -89,8 +89,8 @@ public class ShowPropertiesOfElements {
             gridPaneShowProperties.getChildren().clear();
             gridPaneShowProperties.setBackground(Background.EMPTY);  //limpia color para que quede el color
         });//end btn cerrar
-        borderPaneShowInformationByCatalogue.setTop(gridPaneShowProperties);
-        return borderPaneShowInformationByCatalogue;
-    }//end showInformationByCatalogue
+        borderPaneShowInformationByCatalogs.setTop(gridPaneShowProperties);
+        return borderPaneShowInformationByCatalogs;
+    }//end showInformationByCatalog
 
 }//end class ShowCatalog
