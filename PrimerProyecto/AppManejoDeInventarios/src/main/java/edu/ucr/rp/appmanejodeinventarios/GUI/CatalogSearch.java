@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import static edu.ucr.rp.appmanejodeinventarios.Logic.ConstantsElements.*;
 
-public class CatalogueSearch {
+public class CatalogSearch {
 
     Search search = new Search();
     GraphicalUserInterfaceLogic graphicalUserInterfaceLogic = new GraphicalUserInterfaceLogic();
@@ -27,10 +27,10 @@ public class CatalogueSearch {
      * 
      * @return Nos da la GUI que nos permite buscar en un catálogo
      */
-    public BorderPane catalogueSearching() {
+    public BorderPane catalogSearching() {
 
-        BorderPane borderPaneCatalogueSearching = new BorderPane();
-        borderPaneCatalogueSearching.setPrefSize(BORDER_WIDTH, BORDER_HIGH);
+        BorderPane borderPaneCatalogSearching = new BorderPane();
+        borderPaneCatalogSearching.setPrefSize(BORDER_WIDTH, BORDER_HIGH);
 
         gridPaneSearch.setMinSize(GRID_WIDTH, GRID_HIGH);
         gridPaneSearch.setVgap(8);   //espacio
@@ -46,7 +46,7 @@ public class CatalogueSearch {
         graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
         comboBoxTool.setOnMouseClicked((event) -> {
 
-            textFieldProperties.setDisable(false);
+            textFieldProperties.setDisable(false); 
         });
 
         textFieldProperties.setPromptText("Nombre de la propiedad");
@@ -61,11 +61,12 @@ public class CatalogueSearch {
         textFieldProperties.setDisable(true);
         gridPaneSearch.add(textFieldProperties, 0, 5); /// columna fila
 
-        textFieldProperties.setOnKeyPressed((event) -> {
+        textFieldProperties.setOnMouseClicked((event) -> {
 
             buttonSearch.setDisable(false);
             labelName.setText("");
-            gridPaneSearch.getChildren().removeAll(labelProperties);
+            gridPaneSearch.getChildren().removeAll(labelProperties); //*Genera warnings porque los labels están vacíos y los
+                                                                     //reconoce como nulos pero no afecta al funcionamiento de la aplicación 
         });
 
         buttonSearch = new Button("Buscar");
@@ -87,11 +88,11 @@ public class CatalogueSearch {
         gridPaneSearch.add(buttonClose, 0, 7);
         buttonClose.setOnAction((event) -> {
             gridPaneSearch.getChildren().clear();
-            gridPaneSearch.setBackground(Background.EMPTY);  //limpia color para que quede el color
+            gridPaneSearch.setBackground(Background.EMPTY);  
         });//end btn cerrar
-        borderPaneCatalogueSearching.setTop(gridPaneSearch);
-        return borderPaneCatalogueSearching;
-    }//end BorderPane catalogueSearching()
+        borderPaneCatalogSearching.setTop(gridPaneSearch);
+        return borderPaneCatalogSearching;
+    }//end BorderPane catalogSearching()
 
     /**
      * Metodo que contiene la funcionalidad del boton buscar
@@ -135,4 +136,4 @@ public class CatalogueSearch {
         textFieldProperties.clear();
     }//end searchFuncionality
 
-}//edn CatalogueSearch
+}//edn CatalogSearch

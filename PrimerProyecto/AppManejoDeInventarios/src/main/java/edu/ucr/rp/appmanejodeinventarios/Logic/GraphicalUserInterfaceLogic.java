@@ -5,7 +5,7 @@ import javafx.scene.control.ComboBox;
 
 
 public class GraphicalUserInterfaceLogic {
-        ListFile listFile = new ListFile();
+        Search search = new Search();
 
     /**
      * Cuenta los tokens que hay por linea
@@ -30,10 +30,10 @@ public class GraphicalUserInterfaceLogic {
      * @param received
      */
     public void createComboBox(ComboBox received) {
-        listFile.printFiles();
-        for (int i = 0; i < listFile.counter(); i++) {
-            if (!received.getItems().contains(listFile.catalogueList.get(i))) {
-                received.getItems().addAll(listFile.catalogueList.get(i));
+        search.printFiles();
+        for (int i = 0; i < search.counter(); i++) {
+            if (!received.getItems().contains(search.catalogList.get(i))) {
+                received.getItems().addAll(search.catalogList.get(i));
             }//end if
         }//end for
     }//end createComboBox
