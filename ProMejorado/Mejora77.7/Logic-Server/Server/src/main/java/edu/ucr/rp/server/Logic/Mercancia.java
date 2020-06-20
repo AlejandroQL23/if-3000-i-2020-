@@ -1,5 +1,5 @@
 
-package com.leoc.sockets.multithread.server;
+package edu.ucr.rp.server;
 
 import java.util.List;
 

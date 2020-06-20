@@ -1,12 +1,17 @@
 package edu.ucr.rp.customer.GUI;
 
-
 //import edu.ucr.rp.customer.Logic.SaveObject;
 //import edu.ucr.rp.customer.Logic.Mercancia;
 import edu.ucr.rp.GUI.ConstantsElements;
 import static edu.ucr.rp.GUI.ConstantsElements.*;
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -15,9 +20,64 @@ import javafx.scene.text.*;
 
 public class DefineProperties {
 
-  //  SaveObject saveObject = new SaveObject();
+    //---
+    //--
+    public class Client {
+
+        Socket clientSocket;
+        //  Socket clientSocketx;
+        ArrayList<String> catalogos = new ArrayList<String>();
+
+        public Client(String server, int port) throws InterruptedException {
+            // ArrayList<String> catalogos = new ArrayList<String>();
+            try {
+                System.out.println("Entro a try pero mjm");
+                clientSocket = new Socket(server, port);//
+                System.out.println("Entro a try pero mjm x2");
+                Thread.sleep(1000);
+                // ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+                //  out.writeObject("*"+textFieldCatalogName.getText() + "|"
+                //          + stringProperties + textFieldPropertiesQuantity.getText()) ;//+ Thread.currentThread().getName()
+                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+                ObjectInputStream ines = new ObjectInputStream(clientSocket.getInputStream());
+
+                System.out.println("Entro a try pero mjm x3");
+                //    System.out.println(in.readObject());
+                System.out.println("Soy la ultima linea");
+                catalogos = (ArrayList<String>) in.readObject();  //---> Porblemas 
+
+                // / ///     catalogos.add("juju");
+                //  /     catalogos.add("juja");
+                //      catalogos.add("jujo");
+                //  catalogos = (ArrayList<String>) ines.readObject();
+                System.out.println(catalogos + " catalogoooooooos");
+                System.out.println((ArrayList<String>) ines.readObject() + " read ");
+                // stringProperties="";
+//                out.writeObject(textFieldCatalogName.getText() + "<>\n" + textFieldPropertiesQuantity.getText() + "<>\n"
+//                        + Properties + "<>\n" + Thread.currentThread().getName()); // ---- >  Manda
+//
+//                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream()); //  < ---- trae
+                // System.out.println(in.readObject()); //<--- esto imprime el mensaje que viene desde server
+            }//end try 
+            catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                System.out.println("CAch 1");
+            } finally {
+                System.out.println("finally");
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("CAch 2");
+                }
+            }//end finally
+        }//end client (server, port)
+    }//end client
+
+    //  SaveObject saveObject = new SaveObject();
     ConstantsElements constantsElements = new ConstantsElements();
-   // Mercancia object;
+    // Mercancia object;
 
     ArrayList<Label> labelProperties;
     ArrayList<TextField> textFieldProperties;
@@ -49,19 +109,77 @@ public class DefineProperties {
         comboBoxTool.setValue("Herramientas");
         comboBoxTool.setStyle("-fx-background-color: lightblue");
         gridPaneDefineProperties.add(comboBoxTool, 0, 0);
-      //  graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
-        comboBoxTool.setOnMouseClicked((event) -> {
-            buttonAcceptNumberOfProperties.setDisable(false);
-        });
+        //  graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
+//      
+//        comboBoxTool.setOnMouseClicked((event) -> {
+//            buttonAcceptNumberOfProperties.setDisable(false);
+//        });
 
+////        comboBoxTool.setOnMouseEntered((event) -> {
+////
+////            ExecutorService executorService = Executors.newCachedThreadPool();
+////            executorService.submit(() -> {
+////                System.out.println("Al princi");
+////                Client osoArio = new Client("192.168.1.7", 12345);
+////                System.out.println(catalogos.size()+" Soy tama");
+////                for (int i = 0; i < catalogos.size() - 1; i++) {
+////                    comboBoxTool.getItems().addAll(catalogos.get(i));
+////                }
+////                System.out.println("Llegue al final");
+////
+////            });
+////        });
         buttonAcceptNumberOfProperties = new Button("Aceptar");
         buttonAcceptNumberOfProperties.setTextFill(Color.WHITE);
         buttonAcceptNumberOfProperties.setStyle("-fx-background-color: BLACK");
         buttonAcceptNumberOfProperties.setFont(Font.font("Castellar", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 10));
         gridPaneDefineProperties.add(buttonAcceptNumberOfProperties, 0, 3);
-        buttonAcceptNumberOfProperties.setDisable(true);
+        // buttonAcceptNumberOfProperties.setDisable(true);
         buttonAcceptNumberOfProperties.setOnAction((event) -> {
 
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.submit(() -> {
+                System.out.println("Al princi");
+                try {
+                    Client osoArio = new Client("192.168.1.7", 123);
+                    //   System.out.println(osoArio.clientSocket.getOutputStream() + " Soy tama");
+
+                    for (int i = 0; i < osoArio.catalogos.size() - 1; i++) {
+                        comboBoxTool.getItems().addAll(osoArio.catalogos.get(i));
+                    }
+                    System.out.println("Llegue al final");
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            });
+//---
+////            try {
+////                Client osoArio2 = new Client("192.168.1.7", 123);
+////                 System.out.println(osoArio2.clientSocket.getOutputStream() + " Soy tama");
+////            } catch (InterruptedException ex) {
+////                Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+////            } catch (IOException ex) {
+////                Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+////            }
+            //---     
+
+////            ExecutorService executorService = Executors.newCachedThreadPool();
+////            executorService.submit(() -> {
+////                System.out.println("Al princi");
+////                Client osoArio = new Client("192.168.1.7", 123);
+////                try {
+////                    System.out.println(osoArio.clientSocket.getOutputStream() + "Holaaaaaaaaaaa");
+////                } catch (IOException ex) {
+////                    Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+////                }
+////                for (int i = 0; i < catalogos.size() - 1; i++) {
+////                    comboBoxTool.getItems().addAll(catalogos.get(i));
+////                }
+////                System.out.println("Llegue al final");
+////
+////            });
 ////            labelProperties = new ArrayList<Label>();
 ////            textFieldProperties = new ArrayList<TextField>();
 ////            for (int i = 0; i < saveObject.linesAccount(comboBoxTool.getValue().toString()) - 2; i++) {

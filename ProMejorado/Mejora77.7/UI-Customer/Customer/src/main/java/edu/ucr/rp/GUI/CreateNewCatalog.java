@@ -137,20 +137,20 @@ public class CreateNewCatalog {
             executorService.submit(() -> {
                 Client osoArio = new Client("192.168.1.7", 12345);
             });
-////
-////            object = new Mercancia(textFieldCatalogName.getText().trim(), quantityOfProperties, Properties, new ArrayList<String>());//**VECES QUE ENTRA
-////            saveObject.writeFileCatalog(object);
-////            textFieldCatalogName.clear();
-////            textFieldPropertiesQuantity.clear();
-////            gridPaneNewCatalog.getChildren().removeAll(textFieldProperties);
-////
-////            constantsElements.soundPlayer("noti");
-////            constantsElements.alertInformation("Elemento ingresado y guardado correctamente");
-////
-////            textFieldPropertiesQuantity.setDisable(true);
-////            textFieldCatalogName.setDisable(false);
-////            buttonAcceptNumberOfProperties.setDisable(true);
-////            buttonAdd.setDisable(true);
+//
+//            object = new Mercancia(textFieldCatalogName.getText().trim(), quantityOfProperties, Properties, new ArrayList<String>());//**VECES QUE ENTRA
+//            saveObject.writeFileCatalog(object);
+//            textFieldCatalogName.clear();
+//            textFieldPropertiesQuantity.clear();
+//            gridPaneNewCatalog.getChildren().removeAll(textFieldProperties);
+//
+//            constantsElements.soundPlayer("noti");
+//            constantsElements.alertInformation("Elemento ingresado y guardado correctamente");
+//
+//            textFieldPropertiesQuantity.setDisable(true);
+//            textFieldCatalogName.setDisable(false);
+//            buttonAcceptNumberOfProperties.setDisable(true);
+//            buttonAdd.setDisable(true);
         });//END BUTTON
 
         Button buttonClose = new Button("Cerrar");
@@ -180,7 +180,7 @@ public class CreateNewCatalog {
                 Thread.sleep(5000);
                 ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
                 
-                out.writeObject(textFieldCatalogName.getText() + "|"
+                out.writeObject("*"+textFieldCatalogName.getText() + "|"
                         + stringProperties + textFieldPropertiesQuantity.getText()) ;//+ Thread.currentThread().getName()
                 ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 

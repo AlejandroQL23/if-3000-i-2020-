@@ -1,4 +1,4 @@
-package edu.ucr.rp.customer;
+package edu.ucr.rp.main;
 
 import edu.ucr.rp.customer.GUI.MainInterface;
 
