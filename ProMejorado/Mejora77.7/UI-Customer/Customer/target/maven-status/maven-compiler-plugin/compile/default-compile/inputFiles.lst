@@ -6,9 +6,11 @@ C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GU
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\Help.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\MainInterface.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\DeleteCatalogs.java
-C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\customer\UIEjecutor.java
+C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\customer\CustomerActions.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\CreateNewCatalog.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\ModifyProperties.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\ConstantsElements.java
+C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\customer\Request.java
+C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\main\UIEjecutor.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\ShowCatalog.java
 C:\Users\Ale\Desktop\Mejora77.7\UI-Customer\Customer\src\main\java\edu\ucr\rp\GUI\CatalogSearch.java

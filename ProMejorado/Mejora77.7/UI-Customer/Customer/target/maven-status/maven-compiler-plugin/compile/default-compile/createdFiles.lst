@@ -1,6 +1,7 @@
 edu\ucr\rp\customer\GUI\ShowPropertiesOfElements.class
+edu\ucr\rp\customer\Request.class
 edu\ucr\rp\customer\GUI\Help.class
-edu\ucr\rp\customer\UIEjecutor.class
+edu\ucr\rp\main\UIEjecutor.class
 edu\ucr\rp\customer\GUI\DefineProperties.class
 edu\ucr\rp\customer\GUI\ModifyProperties.class
 edu\ucr\rp\customer\GUI\CatalogSearch.class
@@ -10,6 +11,8 @@ edu\ucr\rp\customer\GUI\MainInterface.class
 edu\ucr\rp\customer\GUI\MainMenuBar.class
 edu\ucr\rp\GUI\ConstantsElements.class
 edu\ucr\rp\customer\GUI\DeleteCatalogs.class
+edu\ucr\rp\customer\GUI\DefineProperties$Client.class
 edu\ucr\rp\customer\GUI\About.class
+edu\ucr\rp\customer\CustomerActions.class
 edu\ucr\rp\customer\GUI\ShowCatalog.class
 edu\ucr\rp\customer\GUI\Credits.class

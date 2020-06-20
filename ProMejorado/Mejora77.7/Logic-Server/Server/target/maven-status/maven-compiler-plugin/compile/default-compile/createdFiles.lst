@@ -1,7 +1,5 @@
+edu\ucr\rp\server\CRUD.class
+edu\ucr\rp\server\Server.class
 edu\ucr\rp\server\ServerApp.class
 edu\ucr\rp\server\Logic\Search.class
-com\leoc\sockets\multithread\server\CRUD.class
-edu\ucr\rp\server\Server.class
-edu\ucr\rp\server\Logic\ConstantsElements.class
-com\leoc\sockets\multithread\server\Mercancia.class
-edu\ucr\rp\server\Logic\GraphicalUserInterfaceLogic.class
+edu\ucr\rp\server\Mercancia.class
