@@ -1,15 +1,21 @@
 package edu.ucr.rp.customer.GUI;
 
 //import edu.ucr.rp.customer.Logic.Search;
-
 import static edu.ucr.rp.GUI.ConstantsElements.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-
 
 public class CatalogSearch {
 
@@ -22,6 +28,59 @@ public class CatalogSearch {
     Button buttonSearch;
     String property = "";
     int position = 0;
+
+    public class Client {
+
+        Socket clientSocket;
+        //  Socket clientSocketx;
+        //  ArrayList<String> catalogos = new ArrayList<String>();
+
+        public Client(String server, int port) throws InterruptedException {
+            // ArrayList<String> catalogos = new ArrayList<String>();
+            try {
+                System.out.println("Entro a try pero mjm");
+                clientSocket = new Socket(server, port);//
+                System.out.println("Entro a try pero mjm x2");
+                Thread.sleep(1000);
+                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+                out.writeObject("@");
+                //          + stringProperties + textFieldPropertiesQuantity.getText()) ;//+ Thread.currentThread().getName()
+                //   ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+                //  ObjectInputStream ines = new ObjectInputStream(clientSocket.getInputStream());
+
+                System.out.println("Entro a try pero mjm x3");
+                //    System.out.println(in.readObject());
+                System.out.println("Soy la ultima linea");
+                //    catalogos = (ArrayList<String>) in.readObject();  //---> Porblemas 
+
+                // / ///     catalogos.add("juju");
+                //  /     catalogos.add("juja");
+                //      catalogos.add("jujo");
+                //  catalogos = (ArrayList<String>) ines.readObject();
+                ///    System.out.println(catalogos + " catalogoooooooos");
+                //      System.out.println((ArrayList<String>) ines.readObject() + " read ");
+                // stringProperties="";
+//                out.writeObject(textFieldCatalogName.getText() + "<>\n" + textFieldPropertiesQuantity.getText() + "<>\n"
+//                        + Properties + "<>\n" + Thread.currentThread().getName()); // ---- >  Manda
+//
+//                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream()); //  < ---- trae
+                // System.out.println(in.readObject()); //<--- esto imprime el mensaje que viene desde server
+            }//end try 
+            catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("CAch 1");
+            } finally {
+                System.out.println("finally");
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("CAch 2");
+                }
+            }//end finally
+        }//end client (server, port)
+    }//end client
 
     /**
      *
@@ -43,7 +102,7 @@ public class CatalogSearch {
         comboBoxTool.setValue("Herramientas");
         comboBoxTool.setStyle("-fx-background-color: lightblue");
         gridPaneSearch.add(comboBoxTool, 0, 0);
-     //   graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
+        //   graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
         comboBoxTool.setOnMouseClicked((event) -> {
 
             textFieldProperties.setDisable(false);
@@ -74,9 +133,29 @@ public class CatalogSearch {
         buttonSearch.setStyle("-fx-background-color: BLACK");//Color del fondo
         buttonSearch.setFont(Font.font("Castellar", FontWeight.SEMI_BOLD, FontPosture.ITALIC, 10));//Tipo de letra
         gridPaneSearch.add(buttonSearch, 0, 6);
-        buttonSearch.setDisable(true);
+        // buttonSearch.setDisable(true);
         buttonSearch.setOnAction((event) -> {
-            searchFuncionality();
+            
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.submit(() -> {
+                System.out.println("Al princi");
+                try {
+                    CatalogSearch.Client osoArio = new CatalogSearch.Client("192.168.1.7", 12345);
+                    //   System.out.println(osoArio.clientSocket.getOutputStream() + " Soy tama");
+
+//                    for (int i = 0; i < osoArio.catalogos.size() - 1; i++) {
+//                        if (!comboBoxTool.getItems().contains(osoArio.catalogos.get(i))) {
+//                            comboBoxTool.getItems().addAll(osoArio.catalogos.get(i));
+//                        }//end if
+//                    }//end for
+                    System.out.println("Llegue al final");
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            });
+            // searchFuncionality();
             textFieldProperties.setDisable(true);
             buttonSearch.setDisable(true);
         });//end funcionalidad del boton buscar

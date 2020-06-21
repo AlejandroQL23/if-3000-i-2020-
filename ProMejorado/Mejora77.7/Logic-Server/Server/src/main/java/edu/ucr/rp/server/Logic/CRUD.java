@@ -1,12 +1,17 @@
 package edu.ucr.rp.server;
 
 import edu.ucr.rp.server.Logic.Search;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.StringTokenizer;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 
@@ -62,21 +67,56 @@ public class CRUD {
 
     Search search = new Search();
 
-    public ArrayList<String>  createComboBox() {
+    public ArrayList<String> createComboBox() {
         search.printFiles();
-        int amount =0;
+        int amount = 0;
         ArrayList<String> salida = new ArrayList<String>();
-        System.out.println(search.counter+"Soy el contador");
+        System.out.println(search.counter + "Soy el contador");
         for (int i = 0; i < search.counter(); i++) {
-           // if (!received.getItems().contains(search.catalogList.get(i))) {
-           //     received.getItems().addAll(search.catalogList.get(i));
-           //     System.out.println( received.getItems().addAll(search.catalogList.get(i)));
-           // }//end if
-           salida.add(search.catalogList.get(i)+"  ");
-           amount++;
+            // if (!received.getItems().contains(search.catalogList.get(i))) {
+            //     received.getItems().addAll(search.catalogList.get(i));
+            //     System.out.println( received.getItems().addAll(search.catalogList.get(i)));
+            // }//end if
+            salida.add(search.catalogList.get(i) + "  ");
+            amount++;
         }//end for
-        salida.add(amount+"");
+        salida.add(amount + "");
         return salida;
     }//end createComboBox
+
+    public String deleteFiles(String fileName) {  //Se da cambio de void a String porque daba problema
+        //  constantsElements.soundPlayer("aviso");
+        //  constantsElements.alertConfirmation("Esta seguro derealizar esta accion?");
+        //   Optional<ButtonType> result = constantsElements.alertConfirmation("").showAndWait();
+        //   if (result.get() == ButtonType.OK) {
+        File puntoCatalogo = new File("ArchTexto//" + fileName + " catalogo.txt");
+        //       File puntoPropiedades = new File("ArchTexto//" + fileName + " propiedades.txt");  //--->> cuando se tenga se descomenta
+        puntoCatalogo.delete();
+        //      puntoPropiedades.delete();   //--->> Cunado se tenga se descomenta
+//            if (!puntoPropiedades.exists() && !puntoCatalogo.exists()) {
+//             //   constantsElements.soundPlayer("exito");
+//              //  constantsElements.alertInformation("El elemento ingresado se borro con exito");
+//            } else {
+//                constantsElements.alertWarning("No se pudo borrar el archivo, intente de nuevo");
+//            }
+        //       }
+        return "";
+
+    }//end deleteFiles()
+
+    public String showContent(String name) throws FileNotFoundException, IOException {
+        String keeper = "";
+        File newFile = new File("ArchTexto//" + name + " catalogo.txt");  // -- > Cambiar a propiedades.txt en este momento no esta
+        FileReader fileReader = new FileReader(newFile);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String currentRegistry = bufferedReader.readLine();
+        while (currentRegistry != null) {
+            if (currentRegistry.contains(name)) {
+                keeper += currentRegistry + "\n \n";
+            }
+            currentRegistry = bufferedReader.readLine();
+        }
+        return keeper;
+    }//end showContent()
 
 }
