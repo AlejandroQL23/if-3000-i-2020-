@@ -35,12 +35,12 @@ public class DefineProperties {
                 clientSocket = new Socket(server, port);//
                 System.out.println("Entro a try pero mjm x2");
                 Thread.sleep(1000);
-                // ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
 
-                //  out.writeObject("*"+textFieldCatalogName.getText() + "|"
+                out.writeObject("%");
                 //          + stringProperties + textFieldPropertiesQuantity.getText()) ;//+ Thread.currentThread().getName()
                 ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-                ObjectInputStream ines = new ObjectInputStream(clientSocket.getInputStream());
+                //  ObjectInputStream ines = new ObjectInputStream(clientSocket.getInputStream());
 
                 System.out.println("Entro a try pero mjm x3");
                 //    System.out.println(in.readObject());
@@ -52,7 +52,7 @@ public class DefineProperties {
                 //      catalogos.add("jujo");
                 //  catalogos = (ArrayList<String>) ines.readObject();
                 System.out.println(catalogos + " catalogoooooooos");
-                System.out.println((ArrayList<String>) ines.readObject() + " read ");
+                //      System.out.println((ArrayList<String>) ines.readObject() + " read ");
                 // stringProperties="";
 //                out.writeObject(textFieldCatalogName.getText() + "<>\n" + textFieldPropertiesQuantity.getText() + "<>\n"
 //                        + Properties + "<>\n" + Thread.currentThread().getName()); // ---- >  Manda
@@ -110,25 +110,46 @@ public class DefineProperties {
         comboBoxTool.setStyle("-fx-background-color: lightblue");
         gridPaneDefineProperties.add(comboBoxTool, 0, 0);
         //  graphicalUserInterfaceLogic.createComboBox(comboBoxTool);
-//      
-//        comboBoxTool.setOnMouseClicked((event) -> {
-//            buttonAcceptNumberOfProperties.setDisable(false);
-//        });
 
-////        comboBoxTool.setOnMouseEntered((event) -> {
-////
-////            ExecutorService executorService = Executors.newCachedThreadPool();
-////            executorService.submit(() -> {
-////                System.out.println("Al princi");
-////                Client osoArio = new Client("192.168.1.7", 12345);
-////                System.out.println(catalogos.size()+" Soy tama");
-////                for (int i = 0; i < catalogos.size() - 1; i++) {
-////                    comboBoxTool.getItems().addAll(catalogos.get(i));
-////                }
-////                System.out.println("Llegue al final");
-////
-////            });
-////        });
+        comboBoxTool.setOnMouseClicked((event) -> {
+
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.submit(() -> {
+                System.out.println("Al princi");
+                try {
+                    Client osoArio = new Client("192.168.1.7", 12345);
+                    //   System.out.println(osoArio.clientSocket.getOutputStream() + " Soy tama");
+
+                    for (int i = 0; i < osoArio.catalogos.size() - 1; i++) {
+                        if (!comboBoxTool.getItems().contains(osoArio.catalogos.get(i))) {
+                            comboBoxTool.getItems().addAll(osoArio.catalogos.get(i));
+                        }//end if
+                    }//end for
+                    System.out.println("Llegue al final");
+
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            });
+
+            buttonAcceptNumberOfProperties.setDisable(false);
+        });
+
+//        comboBoxTool.setOnMouseEntered((event) -> {
+//
+//            ExecutorService executorService = Executors.newCachedThreadPool();
+//            executorService.submit(() -> {
+//                System.out.println("Al princi");
+//                Client osoArio = new Client("192.168.1.7", 12345);
+//                System.out.println(catalogos.size()+" Soy tama");
+//                for (int i = 0; i < catalogos.size() - 1; i++) {
+//                    comboBoxTool.getItems().addAll(catalogos.get(i));
+//                }
+//                System.out.println("Llegue al final");
+//
+//            });
+//        });
         buttonAcceptNumberOfProperties = new Button("Aceptar");
         buttonAcceptNumberOfProperties.setTextFill(Color.WHITE);
         buttonAcceptNumberOfProperties.setStyle("-fx-background-color: BLACK");
@@ -137,23 +158,6 @@ public class DefineProperties {
         // buttonAcceptNumberOfProperties.setDisable(true);
         buttonAcceptNumberOfProperties.setOnAction((event) -> {
 
-            ExecutorService executorService = Executors.newCachedThreadPool();
-            executorService.submit(() -> {
-                System.out.println("Al princi");
-                try {
-                    Client osoArio = new Client("192.168.1.7", 123);
-                    //   System.out.println(osoArio.clientSocket.getOutputStream() + " Soy tama");
-
-                    for (int i = 0; i < osoArio.catalogos.size() - 1; i++) {
-                        comboBoxTool.getItems().addAll(osoArio.catalogos.get(i));
-                    }
-                    System.out.println("Llegue al final");
-
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            });
 //---
 ////            try {
 ////                Client osoArio2 = new Client("192.168.1.7", 123);
@@ -164,7 +168,6 @@ public class DefineProperties {
 ////                Logger.getLogger(DefineProperties.class.getName()).log(Level.SEVERE, null, ex);
 ////            }
             //---     
-
 ////            ExecutorService executorService = Executors.newCachedThreadPool();
 ////            executorService.submit(() -> {
 ////                System.out.println("Al princi");

@@ -1,18 +1,29 @@
 package edu.ucr.rp.customer.GUI;
 
 //import edu.ucr.rp.customer.Logic.SaveObject;
+import edu.ucr.rp.GUI.ConstantsElements;
 import static edu.ucr.rp.GUI.ConstantsElements.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 
-
 public class DeleteCatalogs {
 
-   // SaveObject saveObject = new SaveObject();
+    // SaveObject saveObject = new SaveObject();
     Button buttonDelete;
+    TextField textFieldToDelete;
+    ConstantsElements constantsElements = new ConstantsElements();
 
     /**
      *
@@ -30,7 +41,7 @@ public class DeleteCatalogs {
                 + "-fx-background-repeat : no-repeat;"
                 + "-fx-background-size: 920 920, 20 20, 20 20, 20 20, auto;"));
 
-        TextField textFieldToDelete = new TextField();
+        textFieldToDelete = new TextField();
         textFieldToDelete.setPromptText("Nombre del catalogo que desea eliminar");
         textFieldToDelete.setStyle(
                 "-fx-background-color: lightblue; "
@@ -52,10 +63,28 @@ public class DeleteCatalogs {
         gridPaneDelete.add(buttonDelete, 0, 2);
         buttonDelete.setDisable(true);
         buttonDelete.setOnMouseClicked((event) -> {
-////            String fileName = textFieldToDelete.getText();
-////            saveObject.deleteFiles(fileName);
-////            textFieldToDelete.clear();
-////            buttonDelete.setDisable(true);
+
+            constantsElements.soundPlayer("aviso");
+            constantsElements.alertConfirmation("Esta seguro derealizar esta accion?");
+            Optional<ButtonType> result = constantsElements.alertConfirmation("").showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                ExecutorService executorService = Executors.newCachedThreadPool();
+                executorService.submit(() -> {
+                    try {
+                        DeleteCatalogs.Client osoArio = new DeleteCatalogs.Client("192.168.1.7", 12345);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ShowPropertiesOfElements.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ShowPropertiesOfElements.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+
+                constantsElements.soundPlayer("exito");
+            }//end if
+
+            textFieldToDelete.clear();
+            buttonDelete.setDisable(true);
         });
 
         Button buttonClose = new Button("Cerrar");
@@ -69,4 +98,36 @@ public class DeleteCatalogs {
         });
         return gridPaneDelete;
     }//end deleteCatalogs() 
+
+    public class Client {
+
+        Socket clientSocket;
+
+        public Client(String server, int port) throws InterruptedException, ClassNotFoundException {
+
+            try {
+                clientSocket = new Socket(server, port);//
+                //    Thread.sleep(1000);   //--> no es por el sleep pero quedo comentado igual
+                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+                out.writeObject("^" + textFieldToDelete.getText());
+                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+                System.out.println("mentira juju yo si lo soy Soy la ultima linea");
+
+            }//end try 
+            catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("CAch 1");
+            } finally {
+                System.out.println("finally");
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("CAch 2");
+                }
+            }//end finally
+        }//end client (server, port)
+    }//end client
+
 }//end DeleteCatalogs
