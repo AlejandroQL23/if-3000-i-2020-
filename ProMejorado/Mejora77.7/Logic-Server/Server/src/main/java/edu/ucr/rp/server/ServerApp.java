@@ -5,7 +5,7 @@ import javafx.scene.control.ComboBox;
 
 public class ServerApp {
 
-    static CRUD c = new CRUD();
+  
 
     //   static String v;// = new String();
     public static void main(String[] args) throws ClassNotFoundException, IOException {

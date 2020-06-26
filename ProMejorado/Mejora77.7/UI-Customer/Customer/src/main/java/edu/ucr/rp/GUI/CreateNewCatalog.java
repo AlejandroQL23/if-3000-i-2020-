@@ -1,7 +1,5 @@
 package edu.ucr.rp.customer.GUI;
 
-//import edu.ucr.rp.customer.Logic.SaveObject;
-//import edu.ucr.rp.customer.Logic.Mercancia;
 import edu.ucr.rp.GUI.ConstantsElements;
 import static edu.ucr.rp.GUI.ConstantsElements.*;
 import java.util.*;
@@ -10,18 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class CreateNewCatalog {
 
-    // SaveObject saveObject = new SaveObject();
-    // ConstantsElements constantsElements = new ConstantsElements();
-    // Mercancia object;
     ConstantsElements consElements = new ConstantsElements();
     ArrayList<TextField> textFieldProperties;
     ArrayList<String> Properties;
