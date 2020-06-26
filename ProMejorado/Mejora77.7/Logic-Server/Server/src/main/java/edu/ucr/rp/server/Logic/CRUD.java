@@ -1,18 +1,17 @@
-package edu.ucr.rp.server;
+package edu.ucr.rp.server.Logic;
 
 import edu.ucr.rp.server.Logic.Search;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.StringTokenizer;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 
 public class CRUD {
@@ -77,7 +76,7 @@ public class CRUD {
             //     received.getItems().addAll(search.catalogList.get(i));
             //     System.out.println( received.getItems().addAll(search.catalogList.get(i)));
             // }//end if
-            salida.add(search.catalogList.get(i) + "  ");
+            salida.add(search.catalogList.get(i) + "");
             amount++;
         }//end for
         salida.add(amount + "");
@@ -118,5 +117,78 @@ public class CRUD {
         }
         return keeper;
     }//end showContent()
+    
+    
+    
+    public int linesAccount(String fileName) {
+        int sizeLine = 0;
+        File newFile = new File("ArchTexto//" + fileName + " catalogo.txt");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(newFile);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader); //la unica clase cuyo objeto habilita el readLine
+            String currentRegistry = bufferedReader.readLine();
+            StringTokenizer stringTokenizer = new StringTokenizer(currentRegistry, "|");
+            while (stringTokenizer.hasMoreTokens()) {
+                stringTokenizer.nextToken();
+                sizeLine++;
+            }//end while
+        }//end try//end try
+        catch (FileNotFoundException fileNotFoundException) {
+            JOptionPane.showMessageDialog(null, fileNotFoundException + "\nProblemas con el archivo");
+        } catch (IOException IOException) {
+            JOptionPane.showMessageDialog(null, IOException + "\nProblemas con el archivo");
+        }//end catch's
+        return sizeLine;
+    }//end linesAccount
+
+    public ArrayList<String> readProperties(String fileName, int sizeLine) {
+        ArrayList<String> propertiesKeeper = new ArrayList<>();
+        File newFile = new File("ArchTexto//" + fileName + " catalogo.txt");
+        try {
+            FileInputStream fileInputStream = new FileInputStream(newFile);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String currentRegistry = bufferedReader.readLine();
+            StringTokenizer stringTokenizer = new StringTokenizer(currentRegistry, "|");
+            int checkTokens = 0;
+            while (stringTokenizer.hasMoreTokens()) {
+                if (checkTokens > 0 && checkTokens < sizeLine - 1) {
+                    propertiesKeeper.add(stringTokenizer.nextToken());
+                } //end if
+                else {
+                    stringTokenizer.nextToken();
+                }//end else
+                checkTokens++;
+            }//end while
+        }//end try//end try//end try//end try//end try//end try//end try//end try
+        catch (FileNotFoundException fileNotFoundException) {
+            System.out.println(fileNotFoundException + ": Problemas con el archivo");
+        } catch (IOException IOException) {
+            System.out.println(IOException + ": Problemas con el archivo");
+        }//end catch's
+        return propertiesKeeper;
+    }// end readProperties
+
+    public void writeFileProperties(String recived) {
+        StringTokenizer stringTokenizer = new StringTokenizer(recived, "|");
+        String name = stringTokenizer.nextToken();
+        stringTokenizer.nextToken();
+        String properties = stringTokenizer.nextToken();
+        String atributes = stringTokenizer.nextToken();
+        File newFile = new File("ArchTexto//" + name + " propiedades.txt");
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(newFile, true);
+            PrintStream printStream = new PrintStream(fileOutputStream);
+            printStream.print(name + "|");
+            printStream.print(properties + "|");
+            printStream.print(atributes + "|");
+            printStream.println(" "); //cambio sin object.getTam
+        }//end try//end try//end try//end try
+        catch (FileNotFoundException fileNotFoundException) {
+            JOptionPane.showMessageDialog(null, fileNotFoundException + "\nProblemas con el archivo");
+        }//end catch
+    }//end writeFileCatalogue()
+    
 
 }

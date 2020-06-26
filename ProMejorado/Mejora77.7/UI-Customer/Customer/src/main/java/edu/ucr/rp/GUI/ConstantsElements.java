@@ -2,7 +2,6 @@ package edu.ucr.rp.GUI;
 
 import java.io.File;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 

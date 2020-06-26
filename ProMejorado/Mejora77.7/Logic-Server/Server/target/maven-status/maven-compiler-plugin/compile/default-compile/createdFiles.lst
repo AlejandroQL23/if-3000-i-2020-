@@ -1,5 +1,5 @@
-edu\ucr\rp\server\CRUD.class
 edu\ucr\rp\server\Server.class
 edu\ucr\rp\server\ServerApp.class
 edu\ucr\rp\server\Logic\Search.class
-edu\ucr\rp\server\Mercancia.class
+edu\ucr\rp\server\Logic\Mercancia.class
+edu\ucr\rp\server\Logic\CRUD.class

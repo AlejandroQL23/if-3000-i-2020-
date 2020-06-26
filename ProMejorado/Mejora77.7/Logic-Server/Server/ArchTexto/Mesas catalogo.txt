@@ -1,0 +1,1 @@
+Mesas|patas|tam|precio|ubicacion|4

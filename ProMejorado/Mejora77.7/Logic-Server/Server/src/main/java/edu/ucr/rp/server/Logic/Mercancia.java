@@ -1,5 +1,5 @@
 
-package edu.ucr.rp.server;
+package edu.ucr.rp.server.Logic;
 
 import java.util.List;
 

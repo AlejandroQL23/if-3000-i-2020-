@@ -1,15 +1,11 @@
 package edu.ucr.rp.customer.GUI;
 
 import static edu.ucr.rp.GUI.ConstantsElements.*;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.*;
+import java.util.logging.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -117,7 +113,7 @@ public class ShowPropertiesOfElements {
 
         Socket clientSocket;
         //  Socket clientSocketx;
-        ArrayList<String> catalogos = new ArrayList<String>();
+     //   ArrayList<String> catalogos = new ArrayList<String>();
         String showContent;
 
         public Client(String server, int port) throws InterruptedException, ClassNotFoundException {
@@ -128,7 +124,8 @@ public class ShowPropertiesOfElements {
                 System.out.println("Entro a try pero mjm x2");
                 //    Thread.sleep(1000);   //--> no es por el sleep pero quedo comentado igual
                 ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-
+             
+                //caja -->> trae lo de caja
                 out.writeObject("$" + textFieldSearch.getText());//--> si meto espacios se cae :c
                 //          + stringProperties + textFieldPropertiesQuantity.getText()) ;//+ Thread.currentThread().getName()
                 ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
