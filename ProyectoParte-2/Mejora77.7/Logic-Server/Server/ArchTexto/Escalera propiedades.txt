@@ -1,0 +1,3 @@
+Escalera|Metros|852|Precio|200|
+Escalera|Metros|5|Precio|35000|
+Escalera|Metros|12|Precio|333|
