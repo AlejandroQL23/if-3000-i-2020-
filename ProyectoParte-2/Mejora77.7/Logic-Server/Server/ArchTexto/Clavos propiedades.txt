@@ -1,0 +1,2 @@
+Clavos|Cantidad|500|Precio|15|Peso|2kg|
+Clavos|Cantidad|85|Precio|650|Peso|7Kg|
